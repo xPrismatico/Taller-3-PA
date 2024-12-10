@@ -1,0 +1,54 @@
+@startuml
+skin rose
+entity Usuario {
+}
+entity Inventario {
+cantidad instrumentos
+}
+
+entity InstrumentoCuerda {
+nombre
+material
+codigo
+precio
+stock
+numero de cuerdas
+tipo de uerdas
+tipo sonido
+}
+entity InstrumentoViento {
+nombre
+material
+codigo
+precio
+stock
+}
+entity InstrumentoPercusion {
+nombre
+material
+codigo
+precio
+stock
+altura
+tipo de sonido
+}
+
+note "Los materiales de un instrumento \nson: Metal, Madera y Piel" as n2
+note "El Usuario no puede vender un instrumento \nsi el stock del instrumento es 0" as n4
+
+Inventario"1"---"*"InstrumentoCuerda:tiene >
+Inventario"1"---"*"InstrumentoViento:tiene >
+Inventario"1"---"*"InstrumentoPercusion:tiene >
+
+Usuario "1"--"1" Inventario: accede >
+
+Usuario "1"--"*"InstrumentoCuerda:vende >
+Usuario "1"--"*"InstrumentoViento:vende >
+Usuario "1"--"*"InstrumentoPercusion:vende >
+
+n4 - Usuario
+InstrumentoPercusion -- n2
+InstrumentoCuerda -- n2
+InstrumentoViento -- n2
+
+@enduml

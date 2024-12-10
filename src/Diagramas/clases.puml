@@ -1,0 +1,81 @@
+@startuml
+skin rose
+
+interface Sistema {
++menu(): void
++agregarInstrumento(): void
++venderInstrumento(): void
++consultarInventario(): void
++cerrar(): void
++procesarArchvo(): void
++generarBoleta(operacion: int, nombre: String, precio: int, codigo: String): void
+
+}
+abstract class Instrumento {
+-tipo: String
+-material: String
+-nombre: String
+-codigo: String
+-precio: int
+-stock: int
+
++Instrumento(tipo: String, material: String, nombre: String, codigo: String, precio: int, stock: int)
++getTipo(): String
++getMaterial(): String
++getNombre(): String
++getCodigo(): String
++getPrecio(): int
++getStock(): int
++setStock(): int
+}
+
+class SistemaImpl {
+-instrumentos : ListaInstrumento
++SistemaImpl()
+}
+
+class ListaInstrumento {
+-cantidadActual: int
+-cantidadMaxima: int
+-listaInstrumento: Instrumento[]
+
++ListaInstrumento(cantidadMaxima:int)
++getCantidadMaxima(): int
++getCantidadActual(): int
++agregarInstrumento(instrumento Instrumento):void
++obtenerInstrumento(posicion: int): Instrumento
+}
+
+class Cuerda {
+-tipoCuerda: String
+-numeroCuerda: int
+-tipoSonido: String
+
++Cuerda(tipo: String, material: String, nombre: String, codigo: String, precio: int, stock: int, tipoCuerda: String, numeroCuerda: int, tipoSonido: String)
++getTipoCuerda(): String
++getNumeroCuerdas(): int
++getTipoSonido(): String
+}
+
+class Percusion {
+-tipoSonido: String
+-altura: String
+
++Percusion(tipo: String, material: String, nombre: String, codigo: String, precio: int, stock: int, tipoSonido: String, altura: String)
++getTipoSonido(): String
++getAltura(): String
+}
+class Viento {
++Viento(tipo: String, material: String, nombre: String, codigo: String, precio: int, stock: int)
+}
+
+Sistema <|.. SistemaImpl: implementa
+SistemaImpl "1" -- "1" ListaInstrumento: tiene >
+
+ListaInstrumento "1" o-- "*" Instrumento: contiene >
+
+Instrumento "1" <|-- "*" Cuerda
+Instrumento "1" <|-- "*" Viento
+Instrumento "1" <|-- "*" Percusion
+
+@enduml
